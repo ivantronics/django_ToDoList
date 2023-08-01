@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Are you sure?
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <form method="post" action="#">
+    {% csrf_token %}
+    <h4>Do you really want to delete this ({{ the_list.name }}) list? This operation can't be undone! </h4>
+        <button type="submit" name="yes" value="yes" class="btn btn-danger">Yes</button>
+        <button type="submit" name="no" value="no" class="btn btn-outline-secondary">No</button>
+    </form>
+{% endblock %}

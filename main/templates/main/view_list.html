@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+    View List
+{% endblock %}
+
+{% block content %}
+    <h3>Name: {{ the_list.name }}</h3>
+    <form method="post" action="#">
+    {% csrf_token %}
+
+        {% for item in the_list.item_set.all %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    {% if item.status == False %}
+                        <input type="checkbox" value="clicked" name="c{{ item.id }}">
+                    {% else %}
+                        <input type="checkbox" value="clicked" name="c{{ item.id }}" checked>
+                    {% endif %}
+                    </div>
+                </div>
+                {% if item.status == False %}
+                        <input type="text" value="{{ item.text }}" class="form-control" readonly>
+                    {% else %}
+                        <input type="text" value="{{ item.text }}" style="text-decoration: line-through; background-color: greenyellow;" class="form-control" readonly>
+                    {% endif %}
+{#                <input type="text" value="{{ item.text }}" class="form-control">#}
+            </div>
+        {% endfor %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button type="submit" name="newItem" value="newItem" class="btn btn-success">New Item</button>
+        </div>
+        <input type="text" style="width: 74%;" name="newItemText">
+    </div>
+        <button type="submit" name="save" value="save" class="btn btn-outline-success">Update List</button>
+        <button type="submit" name="deleteList" style="float: right;" value="deleteList" class="btn btn-danger">Delete This List</button>
+    </form>
+{% endblock %}

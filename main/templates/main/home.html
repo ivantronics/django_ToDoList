@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    To Do List app
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="mt-2">To-Do List</h1>
+    <hr class="mt-0 mb-4">
+
+    {% if user.is_authenticated %}
+        <p>Welcome back, {{ user.username }}</p>
+        <p>You can find all of your lists using navigation panel to the left.</p>
+        <p>
+        {% include "main/latest_list.html" %}
+        </p>
+    {% else %}
+        <p>On this web-page you can create to-do lists to boost your productivity! To start first login <a href="/login">here</a> or register new account <a href="/register">here</a></p>
+    {% endif %}
+{% endblock %}
